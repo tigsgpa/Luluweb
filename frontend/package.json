@@ -1,13 +1,12 @@
 {
   "name": "lulu-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "start": "vite preview",  // Added this start script
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
+    "start": "vite preview"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
