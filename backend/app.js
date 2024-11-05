@@ -1,8 +1,8 @@
 const express = require('express');
-const app = new express();
+const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 const Restaurant = require('./model/restaurantModel'); // Import the Mongoose model
 const BugReport = require('./model/BugReport'); // Import the BugReport Mongoose model
@@ -18,15 +18,12 @@ app.get('/search-cuisine', async (req, res) => {
   const query = req.query.q ? req.query.q.toLowerCase() : '';
 
   try {
-    // Fetch all restaurants from the database
     const restaurants = await Restaurant.find();
 
-    // Filter restaurants based on shop_name only
     const filteredRestaurants = restaurants.filter(restaurant => {
       return restaurant.shop_name?.toLowerCase().includes(query);
     });
 
-    // Send the response based on the filtering
     if (filteredRestaurants.length > 0) {
       res.status(200).json({ success: true, data: filteredRestaurants });
     } else {
@@ -40,10 +37,9 @@ app.get('/search-cuisine', async (req, res) => {
 
 // Add route to handle fetching a restaurant by _id
 app.get('/restaurant/:id', async (req, res) => {
-  const { id } = req.params; // Get the restaurant ID from the URL
+  const { id } = req.params;
 
   try {
-    // Find the restaurant by its _id
     const restaurant = await Restaurant.findById(id);
 
     if (restaurant) {
@@ -57,17 +53,14 @@ app.get('/restaurant/:id', async (req, res) => {
   }
 });
 
-
 // Route to handle bug report submission
 app.post('/api/report-bug', async (req, res) => {
   const { name, email, bugType, description } = req.body;
 
-  // Simple validation
   if (!name || !email || !bugType || !description) {
     return res.status(400).json({ status: 'error', message: 'All fields are required.' });
   }
 
-  // Create a new bug report instance
   const newBugReport = new BugReport({
     name,
     email,
@@ -76,9 +69,7 @@ app.post('/api/report-bug', async (req, res) => {
   });
 
   try {
-    // Save the bug report to the database
     await newBugReport.save();
-    // Respond with success
     return res.json({ status: 'success', message: 'Bug reported successfully!' });
   } catch (error) {
     console.error('Error saving to database:', error);
@@ -86,10 +77,10 @@ app.post('/api/report-bug', async (req, res) => {
   }
 });
 
-// Optional: Route to retrieve bug reports (for testing)
+// Route to retrieve bug reports
 app.get('/api/reports', async (req, res) => {
   try {
-    const reports = await BugReport.find(); // Fetch all reports from the database
+    const reports = await BugReport.find();
     res.json({ success: true, data: reports });
   } catch (error) {
     console.error('Error retrieving reports:', error);
@@ -97,7 +88,5 @@ app.get('/api/reports', async (req, res) => {
   }
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on Port ${PORT}`);
-});
+// Export the app for Vercel
+module.exports = app;
