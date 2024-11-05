@@ -1,17 +1,21 @@
 {
-  "name": "lulu",
+  "name": "lulu-backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "Backend for QR Code-Based Indoor Navigation and Food Court Browsing System for LuLu Mall",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
-  "author": "aromal",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.1",
-    "mongoose": "^8.7.2",
+    "mongoose": "^8.7.2"
+  },
+  "devDependencies": {
     "nodemon": "^3.1.7"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
