@@ -10,7 +10,9 @@ const BugReport = require('./model/BugReport'); // Import the BugReport Mongoose
 require('./connection'); // Assuming you have MongoDB connection here
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: 'https://lulu-frontend.onrender.com', // Replace with your actual frontend URL
+}));
 app.use(bodyParser.json()); // Parse JSON request bodies
 
 // Add route to handle search requests
