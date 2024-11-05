@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 8080;
 
 const Restaurant = require('./model/restaurantModel'); // Import the Mongoose model
 const BugReport = require('./model/BugReport'); // Import the BugReport Mongoose model
-
+console.log("Attempting to listen on port:", PORT); // For debugging
 require('./connection'); // Assuming you have MongoDB connection here
 
 app.use(express.json());
