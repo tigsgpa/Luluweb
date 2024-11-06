@@ -8,15 +8,13 @@ const RestaurantMenu = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const menuRefs = useRef([]); // To track each menu card's reference
-  const apiUrl = process.env.REACT_APP_API_URL;
-
 
   useEffect(() => {
     const fetchRestaurant = async () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await axios.get(`${apiUrl}/restaurant/${id}`);
+        const response = await axios.get(`http://localhost:8080/restaurant/${id}`);
         const data = response.data.data;
 
         if (!data) {
