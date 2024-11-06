@@ -2,11 +2,15 @@ const express = require('express');
 const app = new express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+<<<<<<< HEAD
 const PORT = 8080;
+=======
+const PORT = process.env.PORT || 8080 ;
+>>>>>>> 2ba97b84b48a6d060777cd5b647206e965dd8c1f
 
 const Restaurant = require('./model/restaurantModel'); // Import the Mongoose model
 const BugReport = require('./model/BugReport'); // Import the BugReport Mongoose model
-
+console.log("Attempting to listen on port:", PORT); // For debugging
 require('./connection'); // Assuming you have MongoDB connection here
 
 app.use(express.json());

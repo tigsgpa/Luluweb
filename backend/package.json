@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "test": "echo \"Error: no test specified\" && exit 1"
+=======
+    "start": "node app.js",
+    
+>>>>>>> 2ba97b84b48a6d060777cd5b647206e965dd8c1f
   },
   "author": "aromal",
   "license": "ISC",
