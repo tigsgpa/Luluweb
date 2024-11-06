@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const PORT = process.env.PORT ;
+const PORT = 10000 ;
 
 const Restaurant = require('./model/restaurantModel'); // Import the Mongoose model
 const BugReport = require('./model/BugReport'); // Import the BugReport Mongoose model
@@ -14,7 +14,9 @@ app.use(cors({
   origin: 'https://lulu-frontend.onrender.com', // Replace with your actual frontend URL
 }));
 app.use(bodyParser.json()); // Parse JSON request bodies
-
+app.get('/', (req, res) => {
+  res.send('Server is live');
+});
 // Add route to handle search requests
 app.get('/search-cuisine', async (req, res) => {
   const query = req.query.q ? req.query.q.toLowerCase() : '';
